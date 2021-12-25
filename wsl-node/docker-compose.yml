@@ -1,0 +1,24 @@
+
+version: "3.9"
+   
+services:
+  wsl-node:
+    tty: true
+    environment:
+      - NPM_TOKEN
+      - GIT_USER_EMAIL
+      - GIT_USERNAME
+    # pick you own version
+    image: node:12
+    command: tail -f /dev/null
+    # select your own one
+    working_dir: /root/workspace
+    volumes:
+      # this is the secret. don't bind this to your local dir. Just list this out and let it stay in default docker volume space
+      - /root/workspace
+    # inter-service call
+    ports:
+      - "8000:8000"
+      - "3000:3000"
+      - "3001:3001"
+      - "9222:9222"
